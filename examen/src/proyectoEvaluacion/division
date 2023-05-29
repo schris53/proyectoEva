@@ -1,0 +1,80 @@
+import java.util.Random;
+
+public class ExpresionMatematica {
+
+    public static void main(String[] args) {
+        String expresion = generarExpresion();
+        System.out.println("Expresión generada: " + expresion);
+        double resultado = evaluarExpresion(expresion);
+        System.out.println("Resultado: " + resultado);
+    }
+
+    public static String generarExpresion() {
+        Random random = new Random();
+        int cantidadOperandos = random.nextInt(5) + 4; // Genera un número aleatorio entre 4 y 8
+        StringBuilder expresion = new StringBuilder();
+
+        for (int i = 0; i < cantidadOperandos; i++) {
+            int operando = random.nextInt(11) + 2; // Genera un número aleatorio entre 2 y 12
+
+            if (i == 0) {
+                expresion.append(operando);
+            } else {
+                int operador = random.nextInt(4); // Genera un número aleatorio entre 0 y 3
+                switch (operador) {
+                    case 0:
+                        expresion.append(" + ");
+                        break;
+                    case 1:
+                        expresion.append(" - ");
+                        break;
+                    case 2:
+                        expresion.append(" * ");
+                        break;
+                    case 3:
+                        expresion.append(" / ");
+                        break;
+                }
+                expresion.append(operando);
+            }
+        }
+
+        return expresion.toString();
+    }
+
+    public static double evaluarExpresion(String expresion) {
+        String[] tokens = expresion.split(" ");
+
+        double resultado = 0;
+        double operando = 0;
+        String operador = "+";
+
+        for (String token : tokens) {
+            if (token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/")) {
+                operador = token;
+            } else {
+                double numero = Double.parseDouble(token);
+                switch (operador) {
+                    case "+":
+                        resultado += operando;
+                        operando = numero;
+                        break;
+                    case "-":
+                        resultado += operando;
+                        operando = -numero;
+                        break;
+                    case "*":
+                        operando *= numero;
+                        break;
+                    case "/":
+                        operando /= numero;
+                        break;
+                }
+            }
+        }
+
+        resultado += operando;
+
+        return resultado;
+    }
+}

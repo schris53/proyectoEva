@@ -1,0 +1,7 @@
+chris 1 
+alba 1 mario 0 lucas 2 
+alba 1 
+auri 0 
+CPU1 2 CPU2 1 auri 1 
+chr 1 
+jajajaja 0 
